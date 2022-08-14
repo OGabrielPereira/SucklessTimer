@@ -1,27 +1,31 @@
 import { useState, useEffect} from "react";
 
-const DefaultRamainingTime = {
+const defaultRamainingTime = {
     seconds: '00',
     minutes: '00',
     hours: '00',
     days: '00',
 };
 
-export function Timer() {
-    const [remainingTime, setRemainingTime] = useState(DefaultRamainingTime);
+type countdownTimestampMs = {
+    seconds?: number;
+}
 
+export function Timer(props: countdownTimestampMs) {
+    const [remainingTime, setRemainingTime] = useState(defaultRamainingTime);
+    
     useEffect(() => {
         const intervalId = setInterval(() => {
-            updateRemainingTime();
+            updateRemainingTime(props.seconds);
         }, 1000);
         return () => clearInterval(intervalId);
-    },[]);
+    },[props.seconds]);
 
-    function updateRemainingTime() {
-
+    function updateRemainingTime(countdown: any) {
+        console.log("HW");
     }
     return (
-        <div className="flex justify-center text-3xl h-screen">
+        <div className="flex justify-center text-3xl font-serif h-screen">
             <div className="my-96 m-2">
                 <span>{remainingTime.days}</span>
                 <span>d</span>
